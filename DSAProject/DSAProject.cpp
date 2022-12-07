@@ -31,23 +31,24 @@ class ArrayDSA {
         }
 
         void queryProblem() {
-            int choice;
+            string choice;
 
             while (true) {
                 cout << "Options:" << endl;
                 cout << "[1] Display Odd/Even numbers from a set of numbers" << endl;
                 cout << "[2] Display squared of individual numbers" << endl;
+                cout << "[3] Back" << endl;
                 cout << "Enter your choice: ";
                 cin >> choice;
 
-                if (choice == 1 || choice == 2) break;
+                if (choice == "1" || choice == "2" || choice == "3") break;
                 cout << "Invalid input! Please try again.\n";
                 cout << "\n==================================================\n\n";
             }
             cout << "\n==================================================\n\n";
 
-            if (choice == 1) {
-                int chosenType;
+            if (choice == "1") {
+                string chosenType;
 
                 while (true) {
                     cout << "Options:" << endl;
@@ -56,18 +57,18 @@ class ArrayDSA {
                     cout << "Enter your choice: ";
                     cin >> chosenType;
 
-                    if (chosenType == 1 || chosenType == 2) break;
+                    if (chosenType == "1" || chosenType == "2") break;
                     cout << "Invalid input! Please try again.\n";
                     cout << "\n==================================================\n\n";
                 }
                 cout << "\n==================================================\n\n";
-                
+
                 setArrNumbers(queryNumbers());
 
-                if(chosenType == 1) displayOddEvenNumbers("odd");
-                if(chosenType == 2) displayOddEvenNumbers("even");
+                if (chosenType == "1") displayOddEvenNumbers("odd");
+                if (chosenType == "2") displayOddEvenNumbers("even");
             }
-            else {
+            else if (choice == "2") {
                 setArrNumbers(queryNumbers());
                 displaySquaredNumbers();
             }
@@ -86,6 +87,7 @@ class ArrayDSA {
         }
 
         void displaySquaredNumbers() {
+            cout << "\n==================================================\n\n";
             cout << "Squared Numbers: ";
 
             for (int i = 0; i < arrLength; i++) {
@@ -122,25 +124,27 @@ class SortingAlgorithmDSA {
         }
 
         void queryProblem() {
-            int choice;
+            string choice;
 
             while (true) {
                 cout << "Options:" << endl;
                 cout << "[1] Sort List of Numbers using Selection" << endl;
                 cout << "[2] Sort List of Numbers using Insertion" << endl;
+                cout << "[3] Back" << endl;
                 cout << "Enter your choice: ";
                 cin >> choice;
 
-                if (choice == 1 || choice == 2) break;
+                if (choice == "1" || choice == "2" || choice == "3") break;
                 cout << "Invalid input! Please try again.\n";
                 cout << "\n==================================================\n\n";
             }
             cout << "\n==================================================\n\n";
 
-            setArrNumbers(queryNumbers());
-
-            if(choice == 1) selectionSort();
-            if(choice == 2) insertionSort();
+            if (choice != "3") {
+                setArrNumbers(queryNumbers());
+                if (choice == "1") selectionSort();
+                if (choice == "2") insertionSort();
+            }
         }
 
         void selectionSort() {
@@ -256,33 +260,35 @@ class SearchingAlgorithmDSA {
         }
 
         void queryProblem() {
-            int choice;
+            string choice;
 
             while (true) {
                 cout << "Options:" << endl;
                 cout << "[1] Using Binary Search, find element in a list and display attempts and index" << endl;
                 cout << "[2] Using Linear Search, find element in a list and display attempts and index" << endl;
+                cout << "[3] Back" << endl;
                 cout << "Enter your choice: ";
                 cin >> choice;
 
-                if (choice == 1 || choice == 2) break;
+                if (choice == "1" || choice == "2" || choice == "3") break;
                 cout << "Invalid input! Please try again.\n";
                 cout << "\n==================================================\n\n";
             }
             cout << "\n==================================================\n\n";
 
-            setArrNumbers(queryNumbers());
-
-            if (choice == 1) binarySearch();
-            if (choice == 2) linearSearch();
+            if (choice != "3") {
+                setArrNumbers(queryNumbers());
+                if (choice == "1") binarySearch();
+                if (choice == "2") linearSearch();
+            }
         }
 
         void binarySearch() {
             int numberOfAttempts = 0;
             int position = -1;
-            int start = 0;
-            int mid = floor(arrLength / 2);
-            int end = arrLength-1;
+            int low = 0;
+            int high = arrLength-1;
+            int mid = (low - high) / 2;
             int element;
 
             cout << "What element you want to find the index: ";
@@ -291,21 +297,18 @@ class SearchingAlgorithmDSA {
             cout << "\n==================================================\n\n";
             cout << "Binary Search: " << endl;
 
-            while (start <= end) {
+
+            while (low <= high) {
                 numberOfAttempts++;
 
-                if (arrNumbers[mid] == element) {
+                mid = (low + high)/2;
+
+                if(arrNumbers[mid] == element) {
                     position = mid;
                     break;
                 }
-                else if (arrNumbers[mid] < element) {
-                    start = mid - 1;
-                }
-                else if (arrNumbers[mid] > element) {
-                    end = mid + 1;
-                }
-
-                mid = floor((start - end) / 2);
+                else if(arrNumbers[mid] < element) low = mid + 1;
+                else high = mid - 1;
             }
 
             cout << "Number of attempts: " << numberOfAttempts << endl;
@@ -347,50 +350,48 @@ class QueueDSA {
 
     public:
         void queryProblem() {
-            int choice;
+            string choice;
 
             while(true) {
                 cout << "Options:" << endl;
-                cout << "[1] List of orders (Food)" << endl;
+                cout << "[1] Queue of orders (Food)" << endl;
                 cout << "[2] Back" << endl;
                 cout << "Enter your choice: ";
                 cin >> choice;
 
-                if (choice == 1 || choice == 2) {
-                    if (choice == 1) {
-                        int option;
+                if (choice == "1") {
+                    string option;
+                    cout << "\n==================================================\n\n";
+
+                    while (true) {
+                        cout << "Options:" << endl;
+                        cout << "[1] Insert Food" << endl;
+                        cout << "[2] Remove Food" << endl;
+                        cout << "[3] Display Queue" << endl;
+                        cout << "[4] Cancel" << endl;
+                        cout << "Enter your choice: ";
+                        cin >> option;
                         cout << "\n==================================================\n\n";
 
-                        while (true) {
-                            cout << "Options:" << endl;
-                            cout << "[1] Insert Food" << endl;
-                            cout << "[2] Remove Food" << endl;
-                            cout << "[3] Display Queue" << endl;
-                            cout << "[4] Cancel" << endl;
-                            cout << "Enter your choice: ";
-                            cin >> option;
+                        if (option == "1" || option == "2" || option == "3" || option == "4") {
+                            if (option == "1") addElementInQueue();
+                            if (option == "2") removeElementInQueue();
+                            if (option == "3") displayQueue();
+                            if (option == "4") break;
+                        } else {
+                            cout << "Invalid input! Please try again.\n";
                             cout << "\n==================================================\n\n";
-
-                            if (option == 1 || option == 2 || option == 3 || option == 4) {
-                                if (option == 1) addElementInQueue();
-                                if (option == 2) removeElementInQueue();
-                                if (option == 3) displayQueue();
-                                if (option == 4) break;
-                            } else {
-                                cout << "Invalid input! Please try again.\n";
-                                cout << "\n==================================================\n\n";
-                            }
                         }
                     }
-
-                    if(choice == 2) break;
-                } else {
+                }
+                else if (choice == "2") break;
+                else {
                     cout << "Invalid input! Please try again.\n";
                     cout << "\n==================================================\n\n";
                 }
             }
 
-            cout << "\n\n==================================================\n\n";
+            cout << "\n==================================================\n\n";
         }
 
         void addElementInQueue() {
@@ -441,7 +442,7 @@ class StackDSA {
 
     public:
         void queryProblem() {
-            int choice;
+            string choice;
 
             while(true) {
                 cout << "Options:" << endl;
@@ -450,35 +451,32 @@ class StackDSA {
                 cout << "Enter your choice: ";
                 cin >> choice;
 
-                if (choice == 1 || choice == 2) {
-                    if (choice == 1) {
-                        int option;
+                if (choice == "1") {
+                    string option;
+
+                    cout << "\n==================================================\n\n";
+                    while (true) {
+                        cout << "Options:" << endl;
+                        cout << "[1] Insert Book" << endl;
+                        cout << "[2] Remove Book" << endl;
+                        cout << "[3] Display Stack" << endl;
+                        cout << "[4] Cancel" << endl;
+                        cout << "Enter your choice: ";
+                        cin >> option;
                         cout << "\n==================================================\n\n";
 
-                        while (true) {
-                            cout << "Options:" << endl;
-                            cout << "[1] Insert Book" << endl;
-                            cout << "[2] Remove Book" << endl;
-                            cout << "[3] Display Stack" << endl;
-                            cout << "[4] Cancel" << endl;
-                            cout << "Enter your choice: ";
-                            cin >> option;
+                        if (option == "1") addElementInQueue();
+                        else if (option == "2") removeElementInQueue();
+                        else if (option == "3") displayStack();
+                        else if (option == "4") break;
+                        else {
+                            cout << "Invalid input! Please try again.\n";
                             cout << "\n==================================================\n\n";
-
-                            if (option == 1 || option == 2 || option == 3 || option == 4) {
-                                if (option == 1) addElementInQueue();
-                                if (option == 2) removeElementInQueue();
-                                if (option == 3) displayStack();
-                                if (option == 4) break;
-                            } else {
-                                cout << "Invalid input! Please try again.\n";
-                                cout << "\n==================================================\n\n";
-                            }
                         }
                     }
-
-                    if(choice == 2) break;
-                } else {
+                }
+                else if (choice == "2") break;
+                else {
                     cout << "Invalid input! Please try again.\n";
                     cout << "\n==================================================\n\n";
                 }
@@ -492,6 +490,7 @@ class StackDSA {
 
             cout << "Name of book: ";
             cin >> order;
+
             books_stack.push(order);
             cout << "\n==================================================\n\n";
         }
@@ -548,64 +547,103 @@ class LinkedListDSA {
             }
         }
 
+        void insertNodeAtTail(Node* node) {
+            if(head->data == 0) head = node;
+            else {
+                Node* temp = head;
+
+                while(temp->link != NULL) {
+                    temp = temp->link;
+                };
+
+                temp->link = node;
+            }
+        }
+
+        void removeNodeAtHead() {
+            Node* temp = head;
+            if (temp->link != NULL) head = temp->link;
+            else temp->data = 0;
+        }
+
+        void removeNodeAtTail() {
+            Node* temp = head;
+
+            while(temp != NULL) {
+                if(temp->link->link == NULL) temp->link = NULL;
+                temp = temp->link;
+            };
+        }
+
         void queryProblem() {
-            int choice;
+            string choice;
 
             while (true) {
                 cout << "Options:" << endl;
-                cout << "[1] Linked List" << endl;
+                cout << "[1] Linked List Methods" << endl;
                 cout << "[2] Back" << endl;
                 cout << "Enter your choice: ";
                 cin >> choice;
 
-                if (choice == 1 || choice == 2) {
-                    if (choice == 1) {
-                        int option;
+                if (choice == "1") {
+                    string option;
+                    cout << "\n==================================================\n\n";
+
+                    while (true) {
+                        cout << "Options:" << endl;
+                        cout << "[1] Insert Node at Head" << endl;
+                        cout << "[2] Insert Node at Tail" << endl;
+                        cout << "[3] Remove Node at Head" << endl;
+                        cout << "[4] Remove Node at Tail" << endl;
+                        cout << "[5] Display Nodes" << endl;
+                        cout << "[6] Cancel" << endl;
+                        cout << "Enter your choice: ";
+                        cin >> option;
                         cout << "\n==================================================\n\n";
 
-                        while (true) {
-                            cout << "Options:" << endl;
-                            cout << "[1] Insert Node at Head" << endl;
-                            cout << "[2] Insert Node at Tail" << endl;
-                            cout << "[3] Display Nodes" << endl;
-                            cout << "[4] Cancel" << endl;
-                            cout << "Enter your choice: ";
-                            cin >> option;
+                        if (option == "1") {
+                            int number;
+                            cout << "Enter a number: ";
+                            cin >> number;
                             cout << "\n==================================================\n\n";
-
-                            if (option == 1 || option == 2 || option == 3 || option == 4) {
-                                if (option == 1) insertNodeAtHead(getNewNode(20));
-                                /*if (option == 2) insertNodeAtTail();*/
-                                if (option == 3) displayNodes();
-                                if (option == 4) break;
-                            }
-                            else {
-                                cout << "Invalid input! Please try again.\n";
-                                cout << "\n==================================================\n\n";
-                            }
+                            insertNodeAtHead(getNewNode(number));
+                        }
+                        else if (option == "2") {
+                            int number;
+                            cout << "Enter a number: ";
+                            cin >> number;
+                            cout << "\n==================================================\n\n";
+                            insertNodeAtTail(getNewNode(number));
+                        }
+                        else if (option == "3") removeNodeAtHead();
+                        else if (option == "4") removeNodeAtTail();
+                        else if (option == "5") displayNodes();
+                        else if (option == "6") break;
+                        else {
+                            cout << "Invalid input! Please try again.\n";
+                            cout << "\n==================================================\n\n";
                         }
                     }
-
-                    if (choice == 4) break;
                 }
+                else if (choice == "2") break;
                 else {
                     cout << "Invalid input! Please try again.\n";
                     cout << "\n==================================================\n\n";
                 }
             }
 
-            cout << "\n\n==================================================\n\n";
+            cout << "\n==================================================\n\n";
         }
 
         void displayNodes() {
             Node* temp = head;
-
+            cout << "Linked List: " << endl;
             while (temp != NULL) {
-                cout << temp->data << " ";
+                cout << temp->data << " -> ";
                 temp = temp->link;
             };
-
-            cout << endl;
+            cout << "NULL";
+            cout << "\n\n==================================================\n\n";
         }
 
         Node* getNewNode(int data) {
@@ -648,7 +686,7 @@ void startQueue() {
 }
 
 void displayTerminal() {
-    int choice;
+    string choice;
 
     while (true) {
         cout << "Data Structure and Algorithm:" << endl;
@@ -661,18 +699,18 @@ void displayTerminal() {
         cout << "Enter your choice: ";
         cin >> choice;
 
-        if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6) break;
+        if (choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5" || choice == "6") break;
         cout << "Invalid input! Please try again.\n";
         cout << "\n==================================================\n\n";
     }
     cout << "\n==================================================\n\n";
     
-    if(choice == 1) startArray();
-    if(choice == 2) startLinkedList();
-    if(choice == 3) startStacks();
-    if(choice == 4) startQueue();
-    if(choice == 5) startSearchingAlgorithm();
-    if(choice == 6) startSortingAlgorithm();
+    if (choice == "1") startArray();
+    if (choice == "2") startLinkedList();
+    if (choice == "3") startStacks();
+    if (choice == "4") startQueue();
+    if (choice == "5") startSearchingAlgorithm();
+    if (choice == "6") startSortingAlgorithm();
 }
 
 int main() {
